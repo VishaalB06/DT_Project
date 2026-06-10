@@ -101,7 +101,7 @@ avg_temp_c, avg_humidity, avg_wind_speed, avg_rainfall
 
 ---
 
-## Database benchmark: SQLite vs DuckDB vs PostgreSQL vs MySQL
+## Database benchmark: SQLite vs DuckDB vs PostgreSQL vs ServerSQL
 
 We ran five identical analytical queries against each database and measured execution time.
 
@@ -117,7 +117,7 @@ We ran five identical analytical queries against each database and measured exec
 
 ### Results (lower = faster)
 
-| Query | SQLite | DuckDB | PostgreSQL* | MySQL* |
+| Query | SQLite | DuckDB | PostgreSQL* | ServerSQL* |
 |---|---|---|---|---|
 | Q1 Full scan avg | — | — | ~1.35× SQLite | ~1.60× SQLite |
 | Q2 Monthly trend | — | — | ~1.00× SQLite | ~1.20× SQLite |
@@ -132,7 +132,7 @@ SQLite and DuckDB were run live against our real 5.8M-row database on Kaggle. Se
 
 ### Why SQLite wins at our scale
 
-| Factor | SQLite | PostgreSQL / MySQL |
+| Factor | SQLite | PostgreSQL / ServerSQL |
 |---|---|---|
 | Server process | None — runs inside Python | Background server using 30–400 MB RAM |
 | Connection overhead | 0 ms | 1–5 ms per connection |
@@ -248,21 +248,12 @@ They serve different use cases. The relational DB is for complex cross-table ana
 
 ---
 
-## Team contributions
-
-| Member | Notebook | Responsibility |
-|---|---|---|
-| **Nelson** | `01_ingestion_partitioning.ipynb` | PySpark setup, raw data load, ingestion summary, Hive partitioning |
-| **Rutvi** | `02_aggregation_schema.ipynb` | Hourly aggregation, 3NF schema design, SQLite loading |
-| **AlaguVishaal Balaji** | `03_sql_analytics.ipynb` + `team_8_benchmark_forecast.ipynb` | SQL analytics, DB benchmark, PM2.5 forecast, key-value store, documentation |
-
----
 
 ## How to reproduce
 
-1. Upload `team_8.parquet` to Kaggle as a dataset named `team8-parquet`
+1. Upload `team_8.parquet` to Kaggle as a dataset named `team8`
 2. Enable Internet in notebook settings
-3. Run `team_8_benchmark_forecast.ipynb` — handles preprocessing, loading, benchmark, and forecast
+3. Run `dt-project-full.ipynb` — handles preprocessing, loading, benchmark, and forecast
 4. The full pipeline takes approximately 20–30 minutes on Kaggle free tier
 
 
