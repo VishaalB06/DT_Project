@@ -1,0 +1,194 @@
+{
+  "site_103": {
+    "station_name": "CRRI Mathura Road, Delhi - IMD",
+    "total_readings": 93253,
+    "avg_pm25": 95.97
+  },
+  "site_104": {
+    "station_name": "Burari Crossing, Delhi - IMD",
+    "total_readings": 96645,
+    "avg_pm25": 103.06
+  },
+  "site_105": {
+    "station_name": "North Campus, DU, Delhi - IMD",
+    "total_readings": 140210,
+    "avg_pm25": 99.5
+  },
+  "site_106": {
+    "station_name": "IGI Airport (T3), Delhi - IMD",
+    "total_readings": 94934,
+    "avg_pm25": 86.63
+  },
+  "site_107": {
+    "station_name": "Pusa, Delhi - IMD",
+    "total_readings": 104006,
+    "avg_pm25": 90.7
+  },
+  "site_108": {
+    "station_name": "Aya Nagar, Delhi - IMD",
+    "total_readings": 113368,
+    "avg_pm25": 83.06
+  },
+  "site_109": {
+    "station_name": "Lodhi Road, Delhi - IMD",
+    "total_readings": 126499,
+    "avg_pm25": 82.28
+  },
+  "site_113": {
+    "station_name": "Shadipur, Delhi - CPCB",
+    "total_readings": 203301,
+    "avg_pm25": 109.29
+  },
+  "site_114": {
+    "station_name": "IHBAS, Dilshad Garden, Delhi - CPCB",
+    "total_readings": 217173,
+    "avg_pm25": 76.24
+  },
+  "site_115": {
+    "station_name": "NSIT Dwarka, Delhi - CPCB",
+    "total_readings": 206278,
+    "avg_pm25": 87.58
+  },
+  "site_117": {
+    "station_name": "ITO, Delhi - CPCB",
+    "total_readings": 153910,
+    "avg_pm25": 101.66
+  },
+  "site_118": {
+    "station_name": "DTU, Delhi - CPCB",
+    "total_readings": 175518,
+    "avg_pm25": 75.5
+  },
+  "site_119": {
+    "station_name": "Sirifort, Delhi - CPCB",
+    "total_readings": 181342,
+    "avg_pm25": 105.77
+  },
+  "site_122": {
+    "station_name": "Mandir Marg, Delhi - DPCC",
+    "total_readings": 138858,
+    "avg_pm25": 95.08
+  },
+  "site_124": {
+    "station_name": "R K Puram, Delhi - DPCC",
+    "total_readings": 167581,
+    "avg_pm25": 114.22
+  },
+  "site_125": {
+    "station_name": "Punjabi Bagh, Delhi - DPCC",
+    "total_readings": 136961,
+    "avg_pm25": 115.62
+  },
+  "site_1420": {
+    "station_name": "Ashok Vihar, Delhi - DPCC",
+    "total_readings": 171838,
+    "avg_pm25": 110.21
+  },
+  "site_1421": {
+    "station_name": "Dr. Karni Singh Shooting Range, Delhi - DPCC",
+    "total_readings": 172110,
+    "avg_pm25": 97.45
+  },
+  "site_1422": {
+    "station_name": "Dwarka-Sector 8, Delhi - DPCC ",
+    "total_readings": 173106,
+    "avg_pm25": 106.42
+  },
+  "site_1423": {
+    "station_name": "Jahangirpuri, Delhi - DPCC",
+    "total_readings": 168212,
+    "avg_pm25": 129.97
+  },
+  "site_1424": {
+    "station_name": "Jawaharlal Nehru Stadium, Delhi - DPCC",
+    "total_readings": 170444,
+    "avg_pm25": 84.72
+  },
+  "site_1425": {
+    "station_name": "Major Dhyan Chand National Stadium, Delhi - DPCC",
+    "total_readings": 169746,
+    "avg_pm25": 99.2
+  },
+  "site_1427": {
+    "station_name": "Najafgarh, Delhi - DPCC",
+    "total_readings": 168872,
+    "avg_pm25": 83.28
+  },
+  "site_1428": {
+    "station_name": "Okhla Phase-2, Delhi - DPCC",
+    "total_readings": 171434,
+    "avg_pm25": 98.5
+  },
+  "site_1429": {
+    "station_name": "Nehru Nagar, Delhi - DPCC",
+    "total_readings": 172966,
+    "avg_pm25": 115.14
+  },
+  "site_1430": {
+    "station_name": "Rohini, Delhi - DPCC",
+    "total_readings": 170558,
+    "avg_pm25": 116.81
+  },
+  "site_1431": {
+    "station_name": "Patparganj, Delhi - DPCC",
+    "total_readings": 170899,
+    "avg_pm25": 103.29
+  },
+  "site_1432": {
+    "station_name": "Sonia Vihar, Delhi - DPCC",
+    "total_readings": 148268,
+    "avg_pm25": 103.9
+  },
+  "site_1434": {
+    "station_name": "Wazirpur, Delhi - DPCC",
+    "total_readings": 169169,
+    "avg_pm25": 125.44
+  },
+  "site_1435": {
+    "station_name": "Vivek Vihar, Delhi - DPCC",
+    "total_readings": 169129,
+    "avg_pm25": 116.78
+  },
+  "site_1560": {
+    "station_name": "Bawana, Delhi - DPCC",
+    "total_readings": 172947,
+    "avg_pm25": 124.26
+  },
+  "site_1562": {
+    "station_name": "Sri Aurobindo Marg, Delhi - DPCC",
+    "total_readings": 170933,
+    "avg_pm25": 80.52
+  },
+  "site_1563": {
+    "station_name": "Pusa, Delhi - DPCC",
+    "total_readings": 170058,
+    "avg_pm25": 91.18
+  },
+  "site_301": {
+    "station_name": "Anand Vihar, Delhi - DPCC",
+    "total_readings": 154935,
+    "avg_pm25": 131.3
+  },
+  "site_5024": {
+    "station_name": "Alipur, Delhi - DPCC",
+    "total_readings": 189837,
+    "avg_pm25": 100.85
+  },
+  "site_5393": {
+    "station_name": "Chandni Chowk, Delhi - IITM",
+    "total_readings": 170967,
+    "avg_pm25": 100.45
+  },
+  "site_5395": {
+    "station_name": "Lodhi Road, Delhi - IITM",
+    "total_readings": 63853,
+    "avg_pm25": 77.52
+  },
+  "__forecast__": {
+    "for_month": 1,
+    "for_year": 2026,
+    "predicted_pm25": 189.83,
+    "uncertainty": 64.63,
+    "who_classification": "VERY UNHEALTHY"
+  }
+}
