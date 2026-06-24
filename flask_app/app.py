@@ -13,8 +13,8 @@ import os
 
 app = Flask(__name__)
 
-DB_PATH = os.path.join(os.path.dirname("delhi_air_quality.db"), "delhi_air_quality.db")
-KV_PATH = os.path.join(os.path.dirname("kv_store.json"), "kv_store.json")
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "delhi_air_quality.db")
+KV_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "kv_store.json")
 
 
 def get_db():
@@ -193,6 +193,115 @@ def api_pollutants():
     rows = cur.fetchall()
     conn.close()
     return jsonify([r["pollutant_name"] for r in rows])
+
+
+# ── NOVELTY FEATURE 1: DATA QUALITY / CONFIDENCE SCORING ─────────────────────
+
+@app.route("/api/confidence/<station_id>")
+def api_confidence(station_id):
+    """Confidence score for a station — how much to trust its averages."""
+    if not os.path.exists(KV_PATH):
+        return jsonify({"error": "key-value store not found"}), 404
+    with open(KV_PATH) as f:
+        kv = json.load(f)
+    if station_id not in kv:
+        return jsonify({"error": "station not found"}), 404
+    station = kv[station_id]
+    return jsonify({
+        "station_id": station_id,
+        "station_name": station.get("station_name"),
+        "avg_pm25": station.get("avg_pm25"),
+        "confidence_score": station.get("confidence_score", "not computed"),
+        "confidence_label": station.get("confidence_label", "unknown"),
+    })
+
+
+@app.route("/api/confidence-all")
+def api_confidence_all():
+    """Confidence scores for every station — for the dashboard table."""
+    if not os.path.exists(KV_PATH):
+        return jsonify({"error": "key-value store not found"}), 404
+    with open(KV_PATH) as f:
+        kv = json.load(f)
+    results = []
+    for sid, data in kv.items():
+        if sid.startswith("__"):
+            continue
+        if "confidence_score" in data:
+            results.append({
+                "station_id": sid,
+                "station_name": data.get("station_name"),
+                "avg_pm25": data.get("avg_pm25"),
+                "confidence_score": data.get("confidence_score"),
+                "confidence_label": data.get("confidence_label"),
+            })
+    results.sort(key=lambda x: x["confidence_score"])
+    return jsonify(results)
+
+
+# ── NOVELTY FEATURE 2: WIND-SPEED "WHAT-IF" REGRESSION (all pollutants) ──────
+
+@app.route("/api/wind-model/<pollutant>")
+def api_wind_model(pollutant):
+    """The fitted wind-speed regression model parameters for a given pollutant."""
+    if not os.path.exists(KV_PATH):
+        return jsonify({"error": "key-value store not found"}), 404
+    with open(KV_PATH) as f:
+        kv = json.load(f)
+    models = kv.get("__wind_models__", {})
+    if pollutant not in models:
+        return jsonify({"error": f"no wind model for '{pollutant}'"}), 404
+    return jsonify(models[pollutant])
+
+
+@app.route("/api/wind-models")
+def api_wind_models_all():
+    """All available wind models, keyed by pollutant — used to populate the dropdown."""
+    if not os.path.exists(KV_PATH):
+        return jsonify({"error": "key-value store not found"}), 404
+    with open(KV_PATH) as f:
+        kv = json.load(f)
+    return jsonify(kv.get("__wind_models__", {}))
+
+
+@app.route("/api/wind-predict/<pollutant>/<wind_speed>")
+def api_wind_predict(pollutant, wind_speed):
+    """Live prediction: given a pollutant and wind speed, what value does the model predict?"""
+    try:
+        wind_speed = float(wind_speed)
+    except ValueError:
+        return jsonify({"error": "wind_speed must be a number"}), 400
+
+    if not os.path.exists(KV_PATH):
+        return jsonify({"error": "key-value store not found"}), 404
+    with open(KV_PATH) as f:
+        kv = json.load(f)
+    models = kv.get("__wind_models__", {})
+    model = models.get(pollutant)
+    if not model:
+        return jsonify({"error": f"no wind model for '{pollutant}'"}), 404
+
+    predicted = model["slope"] * wind_speed + model["intercept"]
+    predicted = max(0, round(predicted, 2))
+
+    # WHO-style classification only really applies to PM2.5/PM10; for other
+    # pollutants we just report the predicted value without a health label
+    classification = None
+    if pollutant == "pm25":
+        if predicted > 250:   classification = "HAZARDOUS"
+        elif predicted > 150: classification = "VERY UNHEALTHY"
+        elif predicted > 55:  classification = "UNHEALTHY"
+        elif predicted > 35:  classification = "MODERATE"
+        else:                 classification = "GOOD"
+
+    return jsonify({
+        "pollutant": pollutant,
+        "wind_speed": wind_speed,
+        "predicted_value": predicted,
+        "who_classification": classification,
+        "model_r_squared": model.get("r_squared"),
+        "direction": model.get("direction"),
+    })
 
 
 if __name__ == "__main__":
